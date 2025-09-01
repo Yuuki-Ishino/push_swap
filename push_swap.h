@@ -6,20 +6,15 @@
 /*   By: yuukiishino <yuukiishino@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 02:02:43 by yuukiishino       #+#    #+#             */
-/*   Updated: 2025/07/12 18:41:37 by yuukiishino      ###   ########.fr       */
+/*   Updated: 2025/09/01 23:30:34 by yuukiishino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# ifndef INT_MAX
-#  define INT_MAX 2147483647
-# endif
-
-# ifndef INT_MIN
-#  define INT_MIN -2147483648
-# endif
+# define INT_MAX 2147483647
+# define INT_MIN -2147483648
 
 # include <stdlib.h>
 # include <unistd.h>
@@ -55,9 +50,9 @@ int		is_valid_args(int argc, char **argv);
 t_node	*parse_args(int argc, char **argv);
 
 // utils1.c
-long	ft_atol(const char *str);
+int		ft_atoi_safe(const char *str, t_node *head);
 void	free_stack(t_node *stack);
-void	error_exit(void);
+void	error_free_exit(t_node *head);
 int		stack_size(t_node *stack);
 void	change_to_index(t_node *head);
 
@@ -73,6 +68,7 @@ int		get_best_pos_from_two_index(t_node *a, int index, int len);
 int		get_best_pos_from_two_ranges(t_node *a, t_chunk_pair chunk, int len);
 int		is_in_chunk(int index, t_chunk_pair chunk);
 void	make_or_add_node(t_node **head, t_node **tail, t_node *new);
+void	error_exit(void);
 
 // operations1.c
 void	sa(t_stack *stack);

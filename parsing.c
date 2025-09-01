@@ -6,7 +6,7 @@
 /*   By: yuukiishino <yuukiishino@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 15:05:35 by yuukiishino       #+#    #+#             */
-/*   Updated: 2025/07/11 18:01:35 by yuukiishino      ###   ########.fr       */
+/*   Updated: 2025/09/01 23:28:55 by yuukiishino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int	is_valid_number(char *str)
 {
 	int		i;
-	long	n;
 
 	i = 0;
 	if (!str || str[0] == '\0')
@@ -30,9 +29,6 @@ static int	is_valid_number(char *str)
 			return (0);
 		i++;
 	}
-	n = ft_atol(str);
-	if (n < INT_MIN || n > INT_MAX)
-		return (0);
 	return (1);
 }
 
@@ -81,17 +77,17 @@ t_node	*parse_args(int argc, char **argv)
 	t_node	*tail;
 	t_node	*new;
 	int		i;
-	long	num;
+	int		num;
 
 	i = 1;
 	head = NULL;
 	tail = NULL;
 	while (i < argc)
 	{
-		num = ft_atol(argv[i]);
-		if (is_double_num(head, (int)num))
-			error_exit();
-		new = new_node((int)num);
+		num = ft_atoi_safe(argv[i], head);
+		if (is_double_num(head, num))
+			error_free_exit(head);
+		new = new_node(num);
 		make_or_add_node(&head, &tail, new);
 		i++;
 	}

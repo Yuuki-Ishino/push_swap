@@ -6,13 +6,13 @@
 /*   By: yuukiishino <yuukiishino@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/17 14:49:43 by yuukiishino       #+#    #+#             */
-/*   Updated: 2025/07/11 18:26:44 by yuukiishino      ###   ########.fr       */
+/*   Updated: 2025/09/01 23:30:07 by yuukiishino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-long	ft_atol(const char *str)
+int	ft_atoi_safe(const char *str, t_node *head)
 {
 	int		sign;
 	long	result;
@@ -29,6 +29,10 @@ long	ft_atol(const char *str)
 	result = 0;
 	while (*str >= '0' && *str <= '9')
 	{
+		if (sign == 1 && result > (INT_MAX - (*str - '0')) / 10)
+			error_free_exit(head);
+		if (sign == -1 && result > ((-(long)INT_MIN - (*str - '0')) / 10))
+			error_free_exit(head);
 		result = result * 10 + (*str - '0');
 		str++;
 	}
@@ -60,8 +64,10 @@ void	free_stack(t_node *stack)
 	}
 }
 
-void	error_exit(void)
+void	error_free_exit(t_node *stack)
 {
+	if (stack)
+		free_stack(stack);
 	write(2, "Error\n", 6);
 	exit(EXIT_FAILURE);
 }

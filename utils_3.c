@@ -6,7 +6,7 @@
 /*   By: yuukiishino <yuukiishino@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/11 16:21:28 by yuukiishino       #+#    #+#             */
-/*   Updated: 2025/07/11 17:31:39 by yuukiishino      ###   ########.fr       */
+/*   Updated: 2025/09/01 23:30:45 by yuukiishino      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,10 @@ void	make_or_add_node(t_node **head, t_node **tail, t_node *new)
 		(*tail)->next = new;
 		*tail = new;
 	}
+}
+
+void	error_exit(void)
+{
+	write(2, "Error\n", 6);
+	exit(EXIT_FAILURE);
 }
